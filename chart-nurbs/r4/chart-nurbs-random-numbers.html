@@ -46,8 +46,11 @@
 				<p><button onclick=toggleEdges(); >Toggle Edges</button></p>
 				<p><button onclick=toggleControlPoints(); >Toggle Control Points</button></p>
 				<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
-				<p><button onclick=axisHelper.visible=!axisHelper.visible; >Toggle Axes</button></p>
-				<p><button onclick=toggleRotation(); >Toggle Rotation</button></p>
+				<p><button onclick=toggleAxesHelper(); >Toggle Axes</button></p>
+
+				<p><button onclick=toggleBackgroundGradient(); >Toggle Background Gradient</button></p>
+
+				<p><button onclick=toggleSceneAutoRotate() title= 'Stop the spinning!' > Toggle scene rotation </button></p>
 			</details>
 
 			<details open >
@@ -169,6 +172,8 @@
 		chart = addNURBS();
 		scene.add( chart );
 
+		toggleBackgroundGradient();
+
 		toggleEdges();
 
 		toggleControlPoints();
@@ -217,6 +222,11 @@
 	}
 
 
+// Display settings
+
+
+
+
 	function toggleMaterial() {
 
 		if ( chart.material.type === 'MeshPhongMaterial' ) {
@@ -236,6 +246,8 @@
 		}
 
 	}
+
+
 
 	function toggleEdges() {
 
@@ -309,6 +321,21 @@
 
 
 
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+
 	function toggleGrid( size = 500 ) {
 
 		if ( !gridHelper ) {
@@ -342,13 +369,19 @@
 	}
 
 
+	function toggleAxesHelper() {
 
-	function toggleRotation() {
+		axisHelper.visible = !axisHelper.visible;
+
+	}
+
+
+
+	function toggleSceneAutoRotate() {
 
 		controls.autoRotate = !controls.autoRotate;
 
 	}
-
 
 
 	function onWindowResize() {
