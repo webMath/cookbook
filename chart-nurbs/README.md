@@ -8,7 +8,9 @@
 
 ## Full screen: [Chart NURBS  Random Numbers]( https://webmath.github.io/cookbook/chart-nurbs/index.html  )
 
-## Source code: https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart
+## Source code: https://github.com/webmath/cookbook/tree/master/chart-nurbs/
+
+## Forked from" https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart
 
 
 ## Concept
@@ -36,7 +38,6 @@ This is a preliminary example just to get going. It would be great to have some 
 
 
 ## Links of Interest
-
 
 
 ### Three.js Examples & Source

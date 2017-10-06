@@ -11,7 +11,7 @@
 
 	body { font: 12pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
-	iframe { height: 500px; width: 100% }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -35,21 +35,31 @@
 		<details id = "menu" open >
 
 			<summary>hide menu</summary>
+
 			<div id = "title" href = "" ></div>
-			<p><button onclick=toggleEdges(); >Toggle Edges</button></p>
-			<p><button onclick=toggleControlPoints(); >Toggle Control Points</button></p>
-			<p><button onclick=toggleRotation(); >Toggle Rotation</button></p>
 
 			<details open >
-			<summary> hide text</summary>
-			<p>Click the title to refresh the page with fresh random data.</p>
-			<p>
-				Use one/two/three fingers to rotate/zoom/pan the display in 3D<br>
-				Or left/scroll/right with your pointing device
-			</p>
-			<p>Press Control-U/Command-Option-U to view the source code</p>
-			<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>
-			<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info</p>
+				<summary>settings</summary>
+
+				<p><button onclick=toggleMaterial(); >Toggle Material</button></p>
+				<p><button onclick=chart.material.wireframe=!chart.material.wireframe; >Toggle Wireframe</button></p>
+				<p><button onclick=toggleEdges(); >Toggle Edges</button></p>
+				<p><button onclick=toggleControlPoints(); >Toggle Control Points</button></p>
+				<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
+				<p><button onclick=axisHelper.visible=!axisHelper.visible; >Toggle Axes</button></p>
+				<p><button onclick=toggleRotation(); >Toggle Rotation</button></p>
+			</details>
+
+			<details open >
+				<summary> hide text</summary>
+				<p>Click the title to refresh the page with fresh random data.</p>
+				<p>
+					Use one/two/three fingers to rotate/zoom/pan the display in 3D<br>
+					Or left/scroll/right with your pointing device
+				</p>
+				<p>Press Control-U/Command-Option-U to view the source code</p>
+				<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>
+				<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info</p>
 			</details>
 
 		</details>
@@ -65,6 +75,7 @@
 	const infoURI = 'https://github.com/webmath/cookbook/tree/master/chart-nurbs/';
 
 	let chart, chartEdges, chartControlPoints;
+
 
 	const v4 = function( x, y, z, w ) { return new THREE.Vector4( x, y, z, w ); }
 
@@ -102,15 +113,15 @@
 	];
 
 	let renderer, camera, controls, scene;
-	let geometry, material, mesh, axisHelper, gridHelper1, gridHelper2;
+	let geometry, material, mesh, axisHelper, gridHelper;
 
 	init();
 	animate();
 
 	function init() {
 
-		title.innerHTML = 
-			'<h2><a href="" >' + document.title +'</a> &nbsp; ' + 
+		title.innerHTML =
+			'<h2 style=width:200px; ><a href="" >' + document.title +'</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 			'</h2>';
 
@@ -128,39 +139,41 @@
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		axisHelper = new THREE.AxisHelper( 300 );
+		axisHelper = new THREE.AxesHelper( 300 );
 		scene.add( axisHelper );
 
 // something to focus on
 		geometry = new THREE.BoxGeometry( 20, 20, 20 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
-
-		scene.add( mesh );
-
-		gridHelper1 = new THREE.GridHelper( 600, 20 );
-		gridHelper1.position.y = -300;
-		scene.add( gridHelper1 );
-
-		gridHelper2 = new THREE.GridHelper( 600, 20 );
-		gridHelper2.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
-		scene.add( gridHelper2 );
-		gridHelper2.position.z = -300;
+//		scene.add( mesh );
 
 		var light = new THREE.HemisphereLight( 0xeeeeee, 0x888888, 1 );
-		light.position.set( 0, 400, 0 );
+		light.position.set( 400, 400, 0 );
 		scene.add( light );
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		const size = 100
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+//		lightDirectional.position.set( 1, -1, 1 ).normalize();
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
 
 
 		chart = addNURBS();
-
 		scene.add( chart );
-
 
 		toggleEdges();
 
 		toggleControlPoints();
 
+		toggleGrid();
 
 		controls.autoRotate = true;
 
@@ -173,7 +186,6 @@
 
 	function addNURBS() {
 
-		
 		const degree1 = nurbsControlPoints.length - 1; // # of spaces between x control points
 		const degree2 = nurbsControlPoints[ 0 ].length - 1; // # spaces between y control points
 
@@ -187,17 +199,16 @@
 
 		geometry = new THREE.ParametricBufferGeometry( getSurfacePoint, 20, 20 );
 
-/*
 		material = new THREE.MeshPhongMaterial( {
-			color: 0xffffff * Math.random(), 
-			polygonOffset: true,
-			polygonOffsetFactor: 1, // positive value pushes polygon further away
+			color: 0xffffff * Math.random(),
+			polygonOffset: false,
+			polygonOffsetFactor: 10, // positive value pushes polygon further away
 			polygonOffsetUnits: 1,
 			side: 2
 		} );
-*/
 
-		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: THREE.DoubleSide, transparent: true } );
+
+//		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: THREE.DoubleSide, transparent: true } );
 
 		const mesh = new THREE.Mesh( geometry, material );
 
@@ -206,6 +217,25 @@
 	}
 
 
+	function toggleMaterial() {
+
+		if ( chart.material.type === 'MeshPhongMaterial' ) {
+
+			chart.material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: THREE.DoubleSide, transparent: true } );
+
+		} else {
+
+			chart.material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				polygonOffset: false,
+				polygonOffsetFactor: 10, // positive value pushes polygon further away
+				polygonOffsetUnits: 1,
+				side: 2
+			} );
+
+		}
+
+	}
 
 	function toggleEdges() {
 
@@ -246,6 +276,7 @@
 						chartControlPoints.add( mesh );
 
 				}
+
 			}
 
 			scene.add( chartControlPoints );
@@ -275,6 +306,41 @@
 		chartControlPoints.visible = !chartControlPoints.visible;
 
 	}
+
+
+
+	function toggleGrid( size = 500 ) {
+
+		if ( !gridHelper ) {
+
+			gridHelper = new THREE.Object3D();
+			const size05 = size * 0.5;
+
+			obj = new THREE.GridHelper( size, 20, 'red', 'pink' );
+			obj.rotation.x = 0.5 * Math.PI;
+			obj.position.z = -size05;
+			gridHelper.add( obj );
+
+			obj = new THREE.GridHelper( size, 20, 'green', 'lightgreen' );
+	//		gridHelper.rotation.x = 0.5 * Math.PI;
+			obj.position.y = -size05;
+			gridHelper.add( obj );
+
+			obj = new THREE.GridHelper( size, 20, 'blue', 'lightblue' );
+			obj.rotation.z = 0.5 * Math.PI;
+			obj.position.x = size05;
+			gridHelper.add( obj );
+
+			scene.add( gridHelper );
+
+			gridHelper.visible = false;
+
+		}
+
+		gridHelper.visible = !gridHelper.visible;
+
+	}
+
 
 
 	function toggleRotation() {
