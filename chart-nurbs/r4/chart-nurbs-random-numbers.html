@@ -25,11 +25,11 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSCurve.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSSurface.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSUtils.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/curves/NURBSCurve.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/curves/NURBSSurface.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/curves/NURBSUtils.js" ></script>
 
 
 		<details id = "menu" open >
@@ -57,12 +57,12 @@
 				<summary> hide text</summary>
 				<p>Click the title to refresh the page with fresh random data.</p>
 				<p>
-					Use one/two/three fingers to rotate/zoom/pan the display in 3D<br>
+					Use one/two/three fingers to rotate/zoom/pan the display in 3D. 
 					Or left/scroll/right with your pointing device
 				</p>
-				<p>Press Control-U/Command-Option-U to view the source code</p>
-				<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>
-				<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info</p>
+				<p>Press Control-U/Command-Option-U to view the source code.</p>
+				<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors.</p>
+				<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info.</p>
 			</details>
 
 		</details>
@@ -142,7 +142,7 @@
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		axisHelper = new THREE.AxesHelper( 300 );
+		axisHelper = new THREE.AxisHelper( 300 );
 		scene.add( axisHelper );
 
 // something to focus on
@@ -237,7 +237,7 @@
 
 			chart.material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff * Math.random(),
-				polygonOffset: false,
+				polygonOffset: true,
 				polygonOffsetFactor: 10, // positive value pushes polygon further away
 				polygonOffsetUnits: 1,
 				side: 2

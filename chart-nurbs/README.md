@@ -6,11 +6,11 @@
 
 <iframe class=iframeReadMe src=https://webmath.github.io/cookbook/chart-nurbs/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
 
-## Full screen: [Chart NURBS  Random Numbers]( https://webmath.github.io/cookbook/chart-nurbs/index.html  )
+## Full screen: [Chart NURBS  Random Numbers]( https://webmath.github.io/cookbook/chart-nurbs/index.html )
 
-## Source code: https://github.com/webmath/cookbook/tree/master/chart-nurbs/
+### Source code: https://github.com/webmath/cookbook/tree/master/chart-nurbs/
 
-## Forked from" https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart
+### Forked from: https://github.com/ladybug-tools/spider/tree/master/sandbox/n#urbs-chart
 
 
 ## Concept
@@ -21,7 +21,7 @@ Generating smooth meshes from a limited number of controls points is tricky.
 
 [Non-uniform rational B-spline (NURBS)]( https://en.wikipedia.org/wiki/Non-uniform_rational_B-spline ) is a mathematical model commonly used in computer graphics for generating and representing curves and surfaces. NURBS often offer good solutions for this type of charting.
 
-Three.js has a [NURBS plugin]( https://github.com/mrdoob/three.js/tree/dev/examples/js/curves )
+Three.js has a [NURBS plugin]( https://github.com/mrdoob/three.js/tree/r87/examples/js/curves )
 
 This is a preliminary example just to get going. It would be great to have some sample data to graph.
 
@@ -44,7 +44,7 @@ This is a preliminary example just to get going. It would be great to have some 
 
 * https://threejs.org/examples/?q=nurb#webgl_geometry_nurbs
 * https://threejs.org/examples/#canvas_geometry_nurbs
-* Three.js code [NURBS plugin]( https://github.com/mrdoob/three.js/tree/dev/examples/js/curves )
+* Three.js code [NURBS plugin]( https://github.com/mrdoob/three.js/tree/r87/examples/js/curves )
 * Code history https://github.com/mrdoob/three.js/issues/1799
 
 
