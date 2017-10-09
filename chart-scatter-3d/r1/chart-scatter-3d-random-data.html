@@ -6,7 +6,7 @@
 <meta name=description content="3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-08-01" >
-<title>Scatter Well R1</title>
+<title>Chart Scatter 3D R1</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -87,8 +87,7 @@
 		const axisHelper = new THREE.AxisHelper( 60 );
 		scene.add( axisHelper );
 
-//		obj = drawCubes();
-//		scene.add( obj );
+		toggleBackgroundGradient();
 
 		drawSpheres();
 
@@ -407,6 +406,23 @@
 
 	}
 
+
+///////////////////////
+
+
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
 
 ///////////////////////
 

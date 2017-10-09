@@ -1,5 +1,10 @@
 
 
+# Chart Scatter 3d
+
+<iframe class=iframeReadMe src=http://webmath.github.io/cookbook/sandbox/chart-scatter-3D/ width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
+
+
 ## [Chart Scatter 3D]( http://webmath.github.io/cookbook/sandbox/chart-scatter-3D/ )
 
 

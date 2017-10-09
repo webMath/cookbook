@@ -1,16 +1,16 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://webmath.github.io/cookbook/chart-nurbs/index.html  "View file as a web page." ) </span>
 
 
-[NURBS Chart Read Me]( #README.md )
-====
+# [NURBS Chart Read Me]( #README.md )
 
-<iframe class=iframeReadMe src=https://webmath.github.io/cookbook/chart-nurbs/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
+
+<iframe class=iframeReadMe src=http://webmath.github.io/cookbook/chart-nurbs/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
 
 ## Full screen: [Chart NURBS  Random Numbers]( https://webmath.github.io/cookbook/chart-nurbs/index.html )
 
-### Source code: https://github.com/webmath/cookbook/tree/master/chart-nurbs/
+### Source code: http://github.com/webmath/cookbook/tree/master/chart-nurbs/
 
-### Forked from: https://github.com/ladybug-tools/spider/tree/master/sandbox/n#urbs-chart
+### Forked from: http://github.com/ladybug-tools/spider/tree/master/sandbox/n#urbs-chart
 
 
 ## Concept
