@@ -19,7 +19,7 @@
 
 ## To Do
 
-* 2017-10-07 ~ Ass Non-attenuating axis labels
+* 2017-10-07 ~ Add non-attenuating axis labels
 * 2017-10-02 ~ Add 'shadows'
 * 2017-10-02 ~ Add sticks 
 * 2017-10-02 ~ Add section planes
