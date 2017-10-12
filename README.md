@@ -4,8 +4,8 @@
 # [webMath Cookbook Read Me]( #README.md )
 
 
-<iframe src=https://webmath.github.io/cookbook/chart-nurbs/r4/chart-nurbs-random-numbers.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
-_Chart NURBS_
+<iframe src=https://webmath.github.io/cookbook/iframe-carousel/iframe-carousel-r1.html width=100% height=480px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+_iframe carousel_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
 
