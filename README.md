@@ -4,17 +4,17 @@
 # [webMath Cookbook Read Me]( #README.md )
 
 
-<iframe src=http://webmath.github.io/cookbook/chart-nurbs/r4/chart-nurbs-random-numbers.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=https://webmath.github.io/cookbook/chart-nurbs/r4/chart-nurbs-random-numbers.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 _Chart NURBS_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
 
-### Full Screen: [Chart NURBS]( http://webmath.github.io/cookbook/chart-nurbs/r4/chart-nurbs-random-numbers.html )
+### Full Screen: [Chart NURBS]( https://webmath.github.io/cookbook/chart-nurbs/r4/chart-nurbs-random-numbers.html )
 
 
 ## Concept
 
-The goal is to provide individual web pages with short coding examples. The recipes here follow the example of https://threejs.org/examples/.
+The goal is to provide individual web pages with short coding examples. The recipes here follow the example of <https://threejs.org/examples/>.
 
 Each example is a standalone HTML file that contains all the CSS and JavaScript - apart from library files - needed to run the example.
 
