@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic tootoo9 template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,STEM" >
+<meta name = "date" content = "2017-10-08" >
+<title>webMath Cookbook</title>
+<style>
+
+/* Copyright 2017 pushMe pullYou authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: green; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace; height: 100%; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	h2, h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; margin: 0 0 5px 0; width: 100% }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 14pt }
+
+	.bodyFixed { margin: 0 0 0 var( --mnu-width ); overflow: hidden; }
+	.bodyScrolling { border: 0px solid var( --mnu-color ); margin: 0 0 0 var( --mnu-width ); }
+
+	.contentsScrolling { border: 1px solid red; left: var( --mnu-width ); margin: 0 auto; max-width: 800px; right: 0; };
+	.contentsFixed { border: 10px solid lightblue; height: 100%; margin: 0; width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
+
+	#divContents { height: 100%; width: 100%; }
+
+	#ifrContents { border: 10px solid var( --mnu-color ); box-sizing: border-box; height: 100%; width: 100%; }
+
+	#ifrMenuSub { border: 1px solid var( --mnu-color ); box-sizing: border-box; height: 100%; overflow: auto; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box; height: 96%;
+		left: 0; max-width: 320px; margin: 20px; overflow: auto; padding: 5px; position: fixed; top: 0; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p><a href=JavaScript:getContentMarkdown(); >read me / update contents</a></p>
+<!--
+		<p><a href=JavaScript:getMenuHTML() >welcome / update menu</a></p>
+-->
+		<p><a href=JavaScript:getContentMarkdown('chart-nurbs/README.md',defaultRepo,defaultUser); >Charts NURBS</a></p>
+
+		<p><a href=JavaScript:getContentMarkdown('chart-scatter-3d/README.md',defaultRepo,defaultUser); >Charts Scatter 3D</a></p>
+		<hr>
+
+		<div id = "divMenuSub" ></div>
+
+		<hr>
+
+		<div><a href=JavaScript:getContentMarkdown("pages/code-of-conduct.md"); >Code of Conduct</a></div>
+		<div><a href=JavaScript:getContentMarkdown("pages/contributing.md"); >Contributing</a></div>
+		<div><a href=JavaScript:getContentMarkdown("pages/license.md"); >License</a></div>
+		<div><a href=JavaScript:getContentMarkdown("pages/markdown-help.md"); >Markdown Help</a></div>
+
+	</div>
+
+	<div id=divContents ></div>
+
+
+<script>
+
+
+	const defaultUser = 'webmath';
+	const defaultRepo = 'cookbook';
+	const defaultPath = '';
+
+	const infoURI = 'https://github.com/' + defaultUser + '/' + defaultRepo + '/' + defaultPath;
+
+	const b = '<br>';
+	const lorem = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+	const txt =
+		'<p>Welcome!</p>' +
+		'<p>' + lorem + '</p><p>' + lorem + '</p>' +
+	'';
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+//		document.body.className = 'bodyFixed';
+
+		divMenuSub.innerHTML = txt;
+
+//		divContents.innerHTML = '<iframe id=ifrContents src=plugins/threejs-basic.html ></iframe>';
+		getContentMarkdown( defaultPath, defaultRepo, defaultUser );
+
+	}
+
+
+
+	function getMenuHTML( file ) {
+
+		const htm = file ? '<iframe id=ifrMenuSub src=' + file + '></iframe>' : txt;
+
+//		document.body.className = 'bodyScrolling';
+
+		divMenuSub.innerHTML = htm;
+
+	}
+
+
+
+	function getMenuHTMLContentHTML( file ) {
+
+		document.body.className = 'bodyScrolling';
+
+		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' ></iframe>';
+
+//console.log( 'ifrContents.src', parent.ifrContents );
+
+		ifrMenuSub.onload = function() {
+
+			if ( parent.divContents.innerHTML === '' || parent.divContents.className === 'contentsScrolling' ) {
+
+				parent.divContents.innerHTML = '<iframe id=ifrContents ></iframe>';
+
+//		divContents.className = 'contentsScrolling';
+//		divContents.style.cssText = 'border: 1px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+
+			}
+
+		}
+
+		divContents.style.cssText = 'border: 1px solid lightblue; box-sizing: border-box; height: 100%; margin: 0; max-width: 100%; overflow: hidden;';
+
+	}
+
+
+
+
+	function getContentHTML( url ) {
+
+		document.body.className = 'bodyFixed';
+
+		divMenuSub.innerHTML = '';
+
+		divContents.innerHTML = '<iframe id=ifrContents src=' + url + ' ></iframe>';
+		divContents.className = 'contentsFixed';
+		divContents.style.cssText = 'border: 10px solid lightblue; box-sizing: border-box; margin: 0; max-width: 100%;';
+
+	}
+
+
+
+	function getContentMarkdown( path, repo, user ) {
+
+		if ( !path ) {
+
+			divMenuSub.innerHTML = txt;
+
+//			url = 'http://webmath.github.io/cookbook/README.md'; // 
+			url = 'README.md';
+
+		} else {
+
+			user = user ? user : defaultUser;
+			repo = repo ? repo : defaultRepo;
+			path = path ? path : defaultPath;
+
+			url  = 'http://rawgit.com/' + user + '/' + repo + '/master/' + path;
+console.log( 'url', url );
+			divMenuSub.innerHTML = txt;
+
+		}
+
+		document.body.className = 'bodyScrolling';
+
+		divContents.innerHTML = '';
+		divContents.className = 'contentsScrolling';
+		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+
+		requestFile( url, callbackMarkdown );
+
+	}
+
+
+
+	function callbackMarkdown( xhr ){
+
+		let response, html, headers;
+		const converter = new showdown.Converter();
+
+		response = xhr.target.response;
+//console.log( '', response );
+
+		html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+
+		headers = document.querySelectorAll( 'h2' );
+
+console.log( 'headers', headers );
+
+		if ( headers.length <= 2 ) { return; }
+
+		menuLinks = '<h3>Sections</h3>';
+
+		for ( var i = 1; i < headers.length; i++ ) {
+
+			header = headers[ i ];
+			menuLinks += header.textContent.link( '#' + header.id ) + b;
+
+		}
+
+		divMenuSub.innerHTML = menuLinks;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>
