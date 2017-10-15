@@ -79,6 +79,16 @@ iframe.fade-in {
 		displayNext();
 
 		timer = setInterval( displayNext, 8000 );
+		
+		// iOS iframe auto-resize workaround
+		
+		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+
+			ifr.style.width = getComputedStyle( ifr ).width;
+			ifr.style.height = getComputedStyle( ifr ).height;
+			ifr.setAttribute( 'scrolling', 'no' );
+			
+		}
 
 	}
 
